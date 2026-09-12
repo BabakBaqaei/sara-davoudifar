@@ -1,0 +1,13 @@
+# هدرهای Cloudflare Pages.
+# این فایل از `public/` مستقیم در ریشه‌ی خروجی کپی می‌شود و Cloudflare
+# خودش می‌خواندش. معادلِ بخشِ [[headers]] در `netlify.toml`.
+
+# دارایی‌های `_next/static` نامشان هَش دارد، پس تا ابد قابلِ کش‌اند.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ⚠️ تا وقتی این نسخه فقط برای بازبینیِ ساراست، موتورهای جستجو نباید
+# ایندکسش کنند. هم‌تراز با `robots` در `layout.tsx` و `netlify.toml`.
+# **قبل از انتشارِ نهایی هر سه را بردار.**
+/*
+  X-Robots-Tag: noindex, nofollow
