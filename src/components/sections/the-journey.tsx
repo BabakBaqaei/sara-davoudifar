@@ -45,6 +45,11 @@ import { asset } from "@/lib/asset";
  * برای همین نسبت درست‌اند؛ با کادرِ کشسان هر کدام تا ۲۰ واحد جابه‌جا
  * می‌شدند.
  *
+ * ── بی سرشناسه، بی شماره ──
+ * برچسبِ «مسیر حرفه‌ای» بالای بخش و شماره‌های ۰۱ تا ۰۵ هر دو به‌خواستِ
+ * بابک برداشته شدند. `n` در داده می‌مانَد چون هنوز کلیدِ یکتای هر
+ * ایستگاه و `aria-controls` است، فقط دیگر رسم نمی‌شود.
+ *
  * ایستگاهِ «بازاریابی شبکه‌ای» عمداً وسط است و هیچ برجستگیِ بصری ندارد:
  * یکی از پنج، نه تیترِ مسیر. بندِ پایانی که همین را با کلمه هم می‌گفت
  * («تعریف‌کننده‌ی کلِ مسیر نیست») به‌خواستِ بابک برداشته شد — خودِ چیدمان
@@ -94,7 +99,7 @@ export default function TheJourney() {
   const [active, setActive] = useState(0);
 
   return (
-    <SectionShell eyebrow="مسیر حرفه‌ای" id="journey" tone="dark">
+    <SectionShell id="journey" tone="dark">
       <h2 className="reveal max-w-[24ch] font-display text-[clamp(28px,5vw,64px)] font-extrabold leading-[1.22] tracking-tight text-chalk">
         یک مسیر، <em className="not-italic text-rose-lit">پنج ایستگاه</em>
       </h2>
@@ -109,20 +114,13 @@ export default function TheJourney() {
                 <button
                   aria-controls={`journey-items-${s.n}`}
                   aria-expanded={on}
-                  className="group flex w-full items-baseline gap-[clamp(10px,1.6vw,20px)] py-[clamp(14px,2vh,22px)] text-right
+                  className="group flex w-full items-baseline py-[clamp(14px,2vh,22px)] text-right
                              focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-lit"
                   onClick={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onPointerEnter={() => setActive(i)}
                   type="button"
                 >
-                  <span
-                    className={`font-display text-[12px] font-extrabold tabular-nums transition-colors duration-300 ${
-                      on ? "text-rose-lit" : "text-dust"
-                    }`}
-                  >
-                    {s.n}
-                  </span>
                   <span
                     className={`font-display text-[clamp(24px,3.4vw,46px)] font-extrabold leading-[1.2] tracking-tight
                                 transition-colors duration-300 ${on ? "text-chalk" : "text-chalk/45"}`}

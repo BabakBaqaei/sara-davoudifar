@@ -50,16 +50,16 @@ export default function BrandStatement() {
           className="reveal font-display text-[clamp(18px,2.3vw,31px)] font-extrabold leading-[1.75] tracking-tight"
           id="statement-title"
         >
-          <span className="block">من مسیر رشد را فقط آموزش نمی‌دهم؛</span>
-          <span className="block text-rose-deep">خودم آن را زندگی کرده‌ام.</span>
-
-          <span className="mt-[0.9em] block">
+          <span className="block">
             توسعه‌ی فردی، ورود به کسب‌وکار، دوازده سال بازاریابی شبکه‌ای و رهبری یک
             سازمان؛
           </span>
           <span className="block text-rose-deep">
             مسیر من همیشه درباره‌ی یک چیز بوده است: رشد.
           </span>
+
+          <span className="mt-[0.9em] block">من مسیر رشد را فقط آموزش نمی‌دهم؛</span>
+          <span className="block text-rose-deep">خودم آن را زندگی کرده‌ام.</span>
 
           <span className="mt-[0.9em] block">
             در واقع موفقیتِ من فقط چیزی نیست که به دست آورده‌ام؛

@@ -2,8 +2,12 @@ import type { ReactNode } from "react";
 
 type Props = {
   id: string;
-  /** برچسبِ فارسیِ کوتاه — چیزی که بخش *هست*، نه شماره‌ی آن */
-  eyebrow: string;
+  /**
+   * برچسبِ فارسیِ کوتاه — چیزی که بخش *هست*، نه شماره‌ی آن.
+   * اختیاری است: «مسیر حرفه‌ای» به‌خواستِ بابک بی‌سرشناسه ماند، چون
+   * تیترِ درشتش خودش همان را می‌گوید و برچسبِ بالایش تکرار بود.
+   */
+  eyebrow?: string;
   children: ReactNode;
   /**
    * پرده‌ی روشن یا تیره. سایت با ارزشِ روشنایی قصه می‌گوید، نه با
@@ -49,6 +53,7 @@ export default function SectionShell({
       id={id}
     >
       <div className="mx-auto max-w-[1240px] px-[clamp(20px,5vw,72px)]">
+        {eyebrow && (
         <div className="reveal mb-[clamp(28px,4.5vh,56px)] flex items-center gap-3.5">
           {seq && (
             <span
@@ -73,6 +78,7 @@ export default function SectionShell({
             }`}
           />
         </div>
+        )}
         {children}
       </div>
     </section>

@@ -3,6 +3,9 @@ import SectionShell from "@/components/site/section-shell";
 /**
  * ۰۷ — مربی‌گری. این‌جا سارا از «فعالِ حوزه‌ی نتورک» به مربی تبدیل می‌شود.
  *
+ * دعوتِ «شروعِ مسیرِ مربی‌گری» به‌خواستِ بابک برداشته شد. دو بخش بعد،
+ * «همکاری» همان دعوت را می‌کند و تکرارش این‌جا چیزی اضافه نمی‌کرد.
+ *
  * سه مسیر، و ترتیبشان معنا دارد: ذهنیت اول می‌آید چون بی آن دو تای بعدی
  * نمی‌مانند — همان چیزی که در روایتش هست، «رشد با مسئولیت‌پذیری شروع
  * می‌شود».
@@ -59,24 +62,6 @@ export default function Coaching() {
         ))}
       </div>
 
-      <a
-        className="reveal group mt-[clamp(36px,5.5vh,68px)] inline-flex items-center gap-3 rounded-full bg-chalk px-7 py-3.5
-                   text-[13.5px] font-bold text-char transition-transform duration-300 hover:scale-[1.03]
-                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-lit"
-        href="#collaborate"
-      >
-        شروعِ مسیرِ مربی‌گری
-        <svg
-          aria-hidden="true"
-          className="size-3.5 transition-transform duration-300 group-hover:-translate-x-1"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M19 12H5m0 0 6-6m-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </a>
     </SectionShell>
   );
 }
