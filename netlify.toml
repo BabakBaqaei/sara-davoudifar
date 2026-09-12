@@ -1,0 +1,35 @@
+# انتشار روی Netlify.
+#
+# سایت با `output: "export"` خروجیِ کاملاً ایستا می‌دهد، پس Netlify فقط
+# باید پوشه‌ی `out` را سرو کند — هیچ رانتایمی لازم نیست.
+#
+# `NEXT_PUBLIC_BASE_PATH` این‌جا عمداً تنظیم **نشده**: Netlify سایت را در
+# ریشه‌ی دامنه می‌گذارد، و `next.config.ts` وقتی این متغیر خالی باشد
+# هیچ پیشوندی اضافه نمی‌کند. همان ورک‌فلوی GitHub Pages بود که زیرمسیر
+# لازم داشت.
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# دارایی‌های `_next/static` نامشان هَش دارد، پس تا ابد قابلِ کش‌اند.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ⚠️ تا وقتی این نسخه فقط برای بازبینیِ ساراست، موتورهای جستجو نباید
+# ایندکسش کنند. هم‌تراز با `robots` در `layout.tsx`.
+# **قبل از انتشارِ نهایی هر دو را بردار.**
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
