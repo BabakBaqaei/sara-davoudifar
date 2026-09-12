@@ -28,16 +28,16 @@ import { asset } from "@/lib/asset";
  * پیش‌تر داده است. عددهای «تأثیر» (۵۰۰ نفر، ۱۵٬۰۰۰ دلار) عمداً این‌جا
  * تکرار نشدند تا وقتی به آن بخش می‌رسیم تازه بمانند.
  *
- * ── تصویر ──
- * پرتره‌ی لابی انتخاب شد نه پرتره‌ی استودیوییِ قرمز. دلیلش کنارِ هم
- * نشستن است: هیرو خودش قرمزِ استودیویی است و تکرارِ همان نور و همان
- * زمینه، دو بخش را شبیهِ یک عکسِ دوباره‌چاپ‌شده می‌کند. این عکس فضا دارد
- * و سارا را در یک جای واقعی نشان می‌دهد — همان چیزی که یک «درباره»
- * می‌خواهد.
+ * ── تصویر و زمینه ──
+ * بابک خواست از گرافیکِ «ABOUT ME» خودِ سارا استفاده شود و زمینه‌ی این
+ * بخش و بخشِ بالایی هم همان رنگ شود. رنگ اندازه‌گیری شد (میانه‌ی پنج
+ * ناحیه‌ی تمیزِ `Final.png`): **#090a09**، با انحرافِ معیارِ ۱.۸ یعنی
+ * عملاً تخت. توکنش `onyx` است.
  *
- * نسبتِ فایل دقیقاً ۳:۴ است و قاب هم ۳:۴، پس هیچ برشی رخ نمی‌دهد.
- * `object-[55%_center]` فقط برای وقتی است که قاب در عرض‌های کوچک کمی
- * فرق کند: سوژه بین ۲۹.۷٪ تا ۷۹.۸٪ عرض است، یعنی مرکزش ۵۵٪ — نه ۵۰٪.
+ * سارا از لایه‌ی هیروی ۴ برش خورد (همان گرافیک، در ۲۵۶۰ پیکسل) و به
+ * کادرِ سوژه‌اش تریم شد: ۱۱۶۲×۱۰۵۹. چون زمینه‌ی بخش دقیقاً همان رنگِ
+ * زمینه‌ی گرافیک است، عکس بی هیچ قابی روی صفحه می‌نشیند و لبه‌ای پیدا
+ * نیست.
  */
 
 const FACTS = [
@@ -49,12 +49,12 @@ const FACTS = [
 
 export default function AboutSara() {
   return (
-    <SectionShell id="about" eyebrow="درباره" tone="light">
+    <SectionShell id="about" eyebrow="درباره" tone="onyx">
       {/* در RTL ستونِ اول راست است، پس متن سمتِ شروعِ خواندن می‌نشیند و
           عکس دنبالش می‌آید. */}
       <div className="grid items-start gap-[clamp(28px,5vw,72px)] lg:grid-cols-[1.12fr_0.88fr]">
         <div>
-          <h2 className="reveal font-display text-[clamp(24px,3.4vw,42px)] font-extrabold leading-[1.26] tracking-tight text-[#1f1a16]">
+          <h2 className="reveal font-display text-[clamp(24px,3.4vw,42px)] font-extrabold leading-[1.26] tracking-tight text-chalk">
             سارا داودی‌فر
           </h2>
 
@@ -63,7 +63,7 @@ export default function AboutSara() {
               می‌کشد؛ روی ستونی به این عرض قابل‌قبول است، ولی اگر ستون
               باریک‌تر شود «رودخانه»ی فاصله پیدا می‌شود. به همین دلیل در
               موبایل تراز به راست برمی‌گردد. */}
-          <p className="reveal mt-[clamp(20px,3.5vh,38px)] max-w-[58ch] text-[clamp(14.5px,1.45vw,16.5px)] leading-[2.15] text-graphite sm:text-justify">
+          <p className="reveal mt-[clamp(20px,3.5vh,38px)] max-w-[58ch] text-[clamp(14.5px,1.45vw,16.5px)] leading-[2.15] text-dust sm:text-justify">
             من سارا هستم؛ یک کارآفرین، رهبر، مربی و فعال حوزه توسعه فردی، با ۱۲
             سال تجربه در بازاریابی شبکه‌ای و پیشینه‌ای دیرینه در ورزش. مسیر زندگی
             من با تاب‌آوری، یادگیری مستمر، تجربه در کسب‌وکار و تعهد عمیق به رشد
@@ -75,14 +75,14 @@ export default function AboutSara() {
             به دیگران برای تبدیل شدن به بهترین و قدرتمندترین نسخه خودشان.
           </p>
 
-          <dl className="reveal mt-[clamp(30px,5vh,58px)] grid gap-px overflow-hidden rounded-xl bg-[#1f1a16]/12 sm:grid-cols-2">
+          <dl className="reveal mt-[clamp(30px,5vh,58px)] grid gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-2">
             {FACTS.map((f) => (
-              <div className="bg-bone p-[clamp(16px,1.8vw,22px)]" key={f.k}>
+              <div className="bg-[#121312] p-[clamp(16px,1.8vw,22px)]" key={f.k}>
                 {/* بی `/70`: در ۱۱ پیکسل نسبتِ تضاد ۳.۶۱:۱ می‌شد، زیرِ آستانه‌ی
                     ۴.۵. برچسب‌بودنِ این کلمه از اندازه و فاصله‌ی حروف
                     می‌آید، نه از کم‌رنگ‌کردنش. */}
-                <dt className="text-[11px] tracking-[0.14em] text-graphite">{f.k}</dt>
-                <dd className="mt-2 text-[clamp(14px,1.4vw,16px)] leading-[1.75] text-[#1f1a16]">
+                <dt className="text-[11px] tracking-[0.14em] text-dust">{f.k}</dt>
+                <dd className="mt-2 text-[clamp(14px,1.4vw,16px)] leading-[1.75] text-chalk">
                   {f.v}
                 </dd>
               </div>
@@ -90,18 +90,25 @@ export default function AboutSara() {
           </dl>
         </div>
 
-        {/* در موبایل ستون‌ها روی هم می‌چینند و عکس پشتِ سه پاراگراف و
-            جدول می‌افتاد — یعنی چهره‌ی سارا بعد از حدود ۷۰۰ پیکسل متن.
-            در یک «درباره» عکس باید زود بیاید، پس در موبایل اول است و
-            از `lg` به جای خودش برمی‌گردد. */}
-        <div className="reveal relative order-first aspect-[3/4] overflow-hidden rounded-2xl border border-[#1f1a16]/12 lg:order-none">
+        {/* عکسِ برش‌خورده روی زمینه می‌نشیند، بی قاب و بی حاشیه.
+            این همان سارایی است که در گرافیکِ «ABOUT ME» خودش بود و از
+            لایه‌ی هیروی ۴ برش خورد؛ چون زمینه‌ی بخش دقیقاً همان #090a09
+            است، لبه‌ای بین عکس و صفحه دیده نمی‌شود.
+
+            `object-contain` است و نه `cover`: سوژه بریده‌شده است و
+            بریدنِ دوباره‌اش سر یا دست را می‌زند. نسبتِ فایل ۱.۰۹۷ است و
+            قاب هم چیزی نزدیکِ همان.
+
+            در موبایل عکس اول می‌آید: بعد از سه بند متن و جدول، چهره‌ی
+            سارا حدود ۷۰۰ پیکسل پایین‌تر می‌افتاد. */}
+        <div className="reveal relative order-first aspect-[1/1] lg:order-none lg:aspect-[1.097/1]">
           <Image
-            alt="سارا داودی‌فر، ایستاده در لابی"
-            className="object-cover object-[55%_center]"
+            alt="سارا داودی‌فر"
+            className="object-contain object-bottom"
             fill
             quality={88}
             sizes="(min-width: 1024px) 40vw, 100vw"
-            src={asset("/images/portrait-lobby-900.webp")}
+            src={asset("/images/about-sara-cut.webp")}
           />
         </div>
       </div>

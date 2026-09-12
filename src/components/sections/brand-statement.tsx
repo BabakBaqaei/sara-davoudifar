@@ -18,8 +18,11 @@
  * ۳۴px می‌شود ۱۰۷۹. پس سقف روی **۳۱** نشست تا حاشیه‌ی امن بماند.
  * `max-w` هم برداشته شد چون همان بود که خط را می‌شکست.
  *
- * زمینه روشن است و نه تیره: هیرو تیره است و بخشِ داستان هم؛ این بخش
- * نفسِ روشنِ میانِ آن دو است.
+ * ── زمینه از کرِم به onyx رفت ──
+ * این بخش و «درباره» تا امروز پرده‌ی روشنِ میانِ هیرو و داستان بودند.
+ * بابک خواست کلِ زمینه‌ی بعد از هیرو همان رنگِ گرافیکِ «ABOUT ME» خودِ
+ * سارا شود: #090a09. پس متن‌ها هم برگشتند — مرکبِ تیره به chalk و
+ * `rose-deep` به `rose-lit`، چون آن دو روی زمینه‌ی تیره ناخواناند.
  *
  * بالای بخش یک نوارِ گرادیانی هست که درزِ هیرو را می‌بندد. توضیحِ کاملش
  * کنارِ خودش و در `hero-v3-video.tsx` است.
@@ -28,7 +31,7 @@ export default function BrandStatement() {
   return (
     <section
       aria-labelledby="statement-title"
-      className="relative isolate overflow-hidden bg-bone pb-[clamp(84px,15vh,190px)] pt-[clamp(130px,26vh,320px)] text-[#1f1a16]"
+      className="relative isolate overflow-hidden bg-onyx pb-[clamp(84px,15vh,190px)] pt-[clamp(130px,26vh,320px)] text-chalk"
       id="statement"
     >
       {/* نیمه‌ی دومِ درزِ هیرو. از همان #4d1214 شروع می‌شود که کفِ هیرو در
@@ -42,7 +45,7 @@ export default function BrandStatement() {
           قسمتِ تیره‌ی گرادیان می‌افتاد و تضادش می‌شکست. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(96px,19vh,230px)] bg-gradient-to-b from-[#4d1214] to-bone"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(96px,19vh,230px)] bg-gradient-to-b from-[#4d1214] to-onyx"
       />
 
       <div className="mx-auto max-w-[1160px] px-[clamp(20px,5vw,64px)]">
@@ -54,17 +57,17 @@ export default function BrandStatement() {
             توسعه‌ی فردی، ورود به کسب‌وکار، دوازده سال بازاریابی شبکه‌ای و رهبری یک
             سازمان؛
           </span>
-          <span className="block text-rose-deep">
+          <span className="block text-rose-lit">
             مسیر من همیشه درباره‌ی یک چیز بوده است: رشد.
           </span>
 
           <span className="mt-[0.9em] block">من مسیر رشد را فقط آموزش نمی‌دهم؛</span>
-          <span className="block text-rose-deep">خودم آن را زندگی کرده‌ام.</span>
+          <span className="block text-rose-lit">خودم آن را زندگی کرده‌ام.</span>
 
           <span className="mt-[0.9em] block">
             در واقع موفقیتِ من فقط چیزی نیست که به دست آورده‌ام؛
           </span>
-          <span className="block text-rose-deep">
+          <span className="block text-rose-lit">
             چیزی است که در دیگران ایجاد کرده‌ام.
           </span>
         </p>

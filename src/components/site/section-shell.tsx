@@ -14,7 +14,7 @@ type Props = {
    * راه‌راهِ یک‌درمیان: هیرو روشن است، سقوط تیره می‌شود، برخاستن روشن.
    * گروه‌بندی در `page.tsx` نوشته شده.
    */
-  tone: "light" | "dark";
+  tone: "light" | "dark" | "onyx";
   /**
    * فقط برای بخش‌هایی که محتوایشان **واقعاً** ترتیب دارد (مسیر، روش).
    * شماره‌گذاریِ همه‌ی بخش‌ها تزئین است نه اطلاع — و همان چیزی است که
@@ -44,11 +44,18 @@ export default function SectionShell({
   seq,
   className = "",
 }: Props) {
-  const dark = tone === "dark";
+  /* `onyx` پرده‌ی سومی است که با تغییرِ زمینه‌ی «درباره» لازم شد: از
+     `dark` تیره‌تر و سردتر، و دقیقاً همان رنگِ گرافیکِ خودِ سارا. از
+     نظرِ رنگِ متن با `dark` یکی است، فقط زمینه فرق می‌کند. */
+  const dark = tone !== "light";
   return (
     <section
       className={`relative isolate overflow-hidden py-[clamp(88px,15vh,196px)] ${
-        dark ? "bg-char text-chalk" : "bg-bone text-graphite"
+        tone === "onyx"
+          ? "bg-onyx text-chalk"
+          : dark
+            ? "bg-char text-chalk"
+            : "bg-bone text-graphite"
       } ${className}`}
       id={id}
     >
