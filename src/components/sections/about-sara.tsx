@@ -55,7 +55,7 @@ export default function AboutSara() {
     <SectionShell id="about" tone="onyx">
       {/* در RTL ستونِ اول راست است، پس متن سمتِ شروعِ خواندن می‌نشیند و
           عکس دنبالش می‌آید. */}
-      <div className="grid items-start gap-[clamp(28px,5vw,72px)] lg:grid-cols-[0.92fr_1.08fr]">
+      <div className="grid items-start gap-[clamp(28px,5vw,72px)] lg:grid-cols-[1.15fr_0.85fr]">
         <div>
           <h2 className="reveal font-display text-[clamp(24px,3.4vw,42px)] font-extrabold leading-[1.26] tracking-tight text-chalk">
             سارا داودی‌فر
@@ -95,23 +95,28 @@ export default function AboutSara() {
 
         {/* گرافیکِ «ABOUT ME» خودِ سارا، **دست‌نخورده**. اولین بار سارا را
             از آن برش زدم؛ بابک گفت منظورش همین کارت به‌صورت کامل بوده.
-            پس همان `Final.png` است با ابعادِ اصلیِ ۱۶۷۸×۹۳۷، فقط برای
-            وزن به webp رفت (۱۶۰۰KB → ۱۳۳KB، اختلافِ پیکسلیِ میانگین ۱.۰
-            از ۲۵۵ یعنی چشم تفاوتی نمی‌بیند).
+            بعد نسخه‌ی عمودیِ کارت را فرستاد که همین است: ۱۰۸۶×۱۴۴۸.
 
-            قاب ۱.۷۹۱ است، دقیقاً نسبتِ خودِ فایل، تا هیچ‌جای کارت بریده
-            نشود. `object-contain` هم برای همین: حتی اگر قاب در عرضی کمی
-            فرق کند، کارت کامل می‌مانَد.
+            **تنها دستکاری** پاک‌کردنِ دو نوشته‌ی پایین است («SARA
+            DAVOUDIFAR» چپ و «@SARADAVOUDIFAR» راست) که خودش خواست. جای
+            دقیقشان اندازه‌گیری شد — x ۶۴–۲۷۰ و ۸۱۲–۱۰۲۲، هر دو در
+            y ۱۳۳۱–۱۳۴۸ — و شلوارِ سارا (x ۴۰۸–۶۳۸) و ستاره‌های وسط
+            کاملاً بیرونِ آن دو مستطیل‌اند، پس دست نخوردند. جایشان با
+            درون‌یابیِ عمودیِ زمینه و نوفه‌ای به اندازه‌ی بافتِ خودش
+            (σ=۱.۱۴) پر شد؛ بیشینه‌ی روشنایی از بالای ۷۰ به ۲۰ رسید.
+
+            قاب دقیقاً ۱۰۸۶/۱۴۴۸ است، نسبتِ خودِ فایل، و `object-contain`
+            تا هیچ‌جای کارت بریده نشود.
 
             زمینه‌ی بخش همان #090a09 است که از خودِ این فایل اندازه گرفته
             شد، پس لبه‌ای بین کارت و صفحه دیده نمی‌شود. */}
-        <div className="reveal relative order-first aspect-[1678/937] lg:order-none">
+        <div className="reveal relative order-first aspect-[1086/1448] lg:order-none">
           <Image
             alt="کارتِ معرفیِ سارا داودی‌فر"
             className="object-contain"
             fill
             quality={92}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 40vw, 100vw"
             src={asset("/images/about-me-card.webp")}
           />
         </div>
