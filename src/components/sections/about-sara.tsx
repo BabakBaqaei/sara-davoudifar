@@ -115,6 +115,15 @@ export default function AboutSara() {
             alt="کارتِ معرفیِ سارا داودی‌فر"
             className="object-contain"
             fill
+            /* کفِ کارت محو می‌شود. علتش اندازه‌گیری است نه سلیقه: سه
+               پیکسلِ پایینیِ کارت میانگین rgb(54,54,54) دارند چون شلوارِ
+               سفیدِ سارا دقیقاً تهِ کادر بریده شده، در حالی که سه لبه‌ی
+               دیگر ۱۸ هستند و با زمینه یکی. بی این محو، همان‌جا یک خطِ
+               افقیِ تیز می‌مانَد — همان «مرزی» که بابک می‌دید. */
+            style={{
+              maskImage: "linear-gradient(to bottom, #000 82%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, #000 82%, transparent 100%)",
+            }}
             quality={92}
             sizes="(min-width: 1024px) 40vw, 100vw"
             src={asset("/images/about-me-card.webp")}

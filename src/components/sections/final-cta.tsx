@@ -1,6 +1,7 @@
 import ActionPills from "@/components/ui/action-pills";
 import { SocialIcons } from "@/components/ui/social-icons";
-import VideoBackdrop from "@/components/ui/video-backdrop";
+import Image from "next/image";
+import InkReveal from "@/components/ui/ink-reveal";
 import { asset } from "@/lib/asset";
 
 /**
@@ -17,6 +18,10 @@ import { asset } from "@/lib/asset";
  * «تماس با من» نیست؛ یک تصمیم است. آخرِ یک سایتِ روایت‌محور باید همان
  * حرفی را بزند که کلِ روایت رویش ایستاده: انتخاب.
  *
+ * ── پرده‌ی جوهری ──
+ * پس‌زمینه از ویدیو به دو پرتره‌ی سارا تغییر کرد: روشن زیر، تاریک رو، و
+ * نشانگر تاریک را کنار می‌زند. توضیحِ فنی در `ui/ink-reveal.tsx`.
+ *
  * پوسته‌ی مشترکِ بخش‌ها را نمی‌پوشد — نه شماره دارد و نه سرشناسه — تا از
  * ریتمِ بخش‌های قبل بیرون بزند و حسِ پایان بدهد.
  */
@@ -27,26 +32,30 @@ export default function FinalCta() {
       className="relative isolate flex min-h-[92svh] items-center overflow-hidden bg-char py-[clamp(76px,13vh,168px)]"
       id="contact"
     >
-      {/* ویدیوی پس‌زمینه با شفافیت ۵۰٪ — همان که بابک داده بود */}
-      <VideoBackdrop
-        className="absolute inset-0 -z-20"
-        mp4={asset("/video/footer-loop.mp4")}
-        opacity={0.5}
-        poster={asset("/video/footer-loop-poster.jpg")}
-        webm={asset("/video/footer-loop.webm")}
-      />
+      {/* ── پرده‌ی جوهری ──
+          بابک خواست فوتر همان کاری را بکند که هیروی ۱ می‌کرد — پرتره‌ی
+          تاریکِ سارا که کنار می‌رود و پرتره‌ی روشن زیرش پیدا می‌شود — ولی
+          این بار با تکنیکِ «Ink Reveal» که فرستاد: با حرکتِ نشانگر.
 
-      {/* لایه‌ی نشاننده.
-          عددهایش اندازه‌گیری‌شده است، نه سلیقه‌ای: روشن‌ترین نقطه‌ی فریمِ
-          ویدیو روشناییِ ۰.۶۵۹ دارد و با شفافیتِ ۵۰٪ روی زمینه‌ی تیره،
-          زمینه‌ی مؤثر ۰.۱۳۲ می‌شود. آن‌جا متنِ کوچکِ خاکستری فقط ۲.۱۸:۱
-          می‌گرفت. با این پوششِ عمیق‌تر، زمینه‌ی مؤثر به ۰.۰۹۹ می‌رسد و
-          متنِ روشن از آستانه رد می‌شود. */}
-      <div
+          چیدمانِ لایه‌ها:
+            زیر  : پرتره‌ی روشن، همیشه آن‌جاست.
+            روی  : بومی که پرتره‌ی تاریک را می‌کشد و نشانگر سوراخش می‌کند.
+            بالا : پرده و هاله و متن.
+
+          ویدیوی پس‌زمینه‌ی قبلی از این‌جا رفت؛ دو لایه‌ی تصویر روی هم با
+          یک ویدیو، هم سنگین می‌شد و هم شلوغ. فایلِ ویدیو سرِ جایش است. */}
+      <Image
+        alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10
-                   bg-[linear-gradient(to_bottom,rgba(26,23,25,0.94)_0%,rgba(26,23,25,0.74)_46%,rgba(26,23,25,0.88)_100%)]"
+        className="-z-20 object-cover object-[50%_28%]"
+        fill
+        quality={82}
+        sizes="100vw"
+        src={asset("/images/hero-lit-1792.jpg")}
       />
+      <div aria-hidden="true" className="absolute inset-0 -z-20">
+        <InkReveal maskSrc={asset("/images/hero-dark-1792.jpg")} />
+      </div>
 
       {/* هاله‌ی گرم که چشم را وسط نگه می‌دارد */}
       <div
@@ -55,7 +64,11 @@ export default function FinalCta() {
                    bg-[radial-gradient(ellipse_58%_46%_at_50%_46%,rgba(200,50,74,0.14),transparent_72%)]"
       />
 
-      <div className="mx-auto w-full max-w-[1240px] px-[clamp(20px,5vw,72px)] text-center">
+      {/* `pointer-events-none` روی ظرفِ متن، و `auto` فقط روی چیزهایی که
+          واقعاً کلیک‌پذیرند. بی این، ستونِ متن کلِ وسطِ فوتر را می‌گرفت و
+          پرده‌ی جوهری فقط در حاشیه‌ها کار می‌کرد — یعنی درست همان‌جایی که
+          چشم نگاه نمی‌کند. */}
+      <div className="pointer-events-none mx-auto w-full max-w-[1240px] px-[clamp(20px,5vw,72px)] text-center">
         <p className="reveal text-[12.5px] tracking-[0.16em] text-chalk/85">فصلِ بعدی</p>
 
         <h2
@@ -71,11 +84,11 @@ export default function FinalCta() {
           می‌شود.
         </p>
 
-        <div className="reveal mt-[clamp(34px,5.5vh,64px)]">
+        <div className="reveal pointer-events-auto mt-[clamp(34px,5.5vh,64px)]">
           <ActionPills />
         </div>
 
-        <div className="reveal mt-[clamp(40px,6.5vh,76px)] flex justify-center">
+        <div className="reveal pointer-events-auto mt-[clamp(40px,6.5vh,76px)] flex justify-center">
           <SocialIcons />
         </div>
 
