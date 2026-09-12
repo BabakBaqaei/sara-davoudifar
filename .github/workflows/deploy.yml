@@ -1,0 +1,70 @@
+# انتشار روی GitHub Pages.
+#
+# با هر push روی main اجرا می‌شود: بیلد می‌گیرد، خروجیِ ایستا را برمی‌دارد
+# و منتشر می‌کند. هیچ کاری دستی لازم نیست جز یک‌بار روشن‌کردنِ Pages در
+# تنظیماتِ مخزن (Settings → Pages → Source: GitHub Actions).
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  # دکمه‌ی اجرای دستی، برای وقتی می‌خواهی بدون کامیت دوباره منتشر کنی
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# اگر وسطِ انتشار push تازه‌ای آمد، قبلی لغو نشود — نیمه‌کاره ماندنِ
+# انتشار بدتر از یک دقیقه صبر است.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # مخزنِ پروژه‌ای روی `USERNAME.github.io/REPO/` سرو می‌شود، پس همه‌ی
+      # دارایی‌ها باید `/REPO` پیشوند بگیرند. ولی مخزنِ شخصی
+      # (`USERNAME.github.io`) در ریشه‌ی دامنه می‌نشیند و آن‌جا پیشوند
+      # خودش خرابی می‌سازد. این شرط هر دو حالت را می‌گیرد.
+      - name: زیرمسیر را از نامِ مخزن دربیاور
+        run: |
+          REPO='${{ github.event.repository.name }}'
+          if [[ "$REPO" == *.github.io ]]; then
+            echo "NEXT_PUBLIC_BASE_PATH=" >> "$GITHUB_ENV"
+          else
+            echo "NEXT_PUBLIC_BASE_PATH=/$REPO" >> "$GITHUB_ENV"
+          fi
+
+      - run: npm run build
+
+      # بی این فایل، GitHub Pages پوشه‌ی `_next/` را نادیده می‌گیرد (Jekyll
+      # هر چیزی را که با زیرخط شروع شود رد می‌کند) و سایت بی CSS و بی JS
+      # بالا می‌آید.
+      - run: touch out/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

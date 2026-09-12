@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════
+   پیدا (Peyda v3، نسخه‌ی Standard) — self-hosted، woff2، مجموعاً ۱۳۲KB.
+
+   سه وزن، هرکدام دقیقاً به چیزی که در کد استفاده می‌شود نگاشت شده:
+     ۴۰۰ Regular    → متن
+     ۷۰۰ Bold       → font-bold
+     ۸۰۰ ExtraBold  → font-display برای تیترها
+
+   چرا نسخه‌ی Standard و نه دو نسخه‌ی دیگر:
+     • Non-English گلیف لاتین ندارد و «Personal Brand» و برچسب‌های مونو
+       را نمی‌تواند ست کند.
+     • FaNum رقم لاتین را به گلیف فارسی نگاشت می‌کند؛ ما ارقام فارسی را
+       مستقیم یونیکد می‌نویسیم، پس Standard رفتار قابل‌پیش‌بینی‌تری دارد.
+
+   مهم: پیدا نیم‌فاصله (U+200C) دارد — برخلاف YekanBoom که نداشت و
+   مجبور بودیم تیترهای نیم‌فاصله‌دار را با فونت دیگری ست کنیم. حالا کل
+   سایت با یک خانواده ست می‌شود.
+   ═══════════════════════════════════════════════════════════════════ */
+/* @font-face این‌جا نیست و عمداً به `next/font/local` در `layout.tsx`
+   منتقل شد. دلیلش انتشار است: با `basePath` (روی
+   `USERNAME.github.io/REPO/`) Next آدرس‌های داخلِ HTML را پیشوند می‌دهد
+   ولی `url()` داخلِ CSS را **دست نمی‌زند** — `/fonts/...` آن‌جا ۴۰۴
+   می‌شد و کلِ سایت با فونتِ پیش‌فرض بالا می‌آمد. مسیرِ نسبی هم جواب
+   نداد: لودرِ CSSِ Next آن را مثل یک ماژول resolve می‌کند و بیلد
+   می‌شکند. با `next/font/local` خودِ Next فایل‌ها را در
+   `_next/static/media/` می‌گذارد و آدرسشان همیشه درست است. */
+
+/* ═══════════════════════════════════════════════════════════════════
+   Tailwind v4 پیکربندی را داخل CSS انجام می‌دهد، نه در tailwind.config.js.
+   پرامپت ShineBorder می‌گفت انیمیشن را به فایل کانفیگ اضافه کنید؛
+   معادل v4 آن همین بلوک @theme است.
+   ═══════════════════════════════════════════════════════════════════ */
+@theme {
+  --font-sans: var(--font-peyda), Tahoma, 'Segoe UI', sans-serif;
+  /* همان خانواده، فقط وزن سنگین‌تر — پیدا نیم‌فاصله دارد پس دیگر لازم
+     نیست تیتر با فونت جدا ست شود. */
+  --font-display: var(--font-peyda), Tahoma, 'Segoe UI', sans-serif;
+
+  /* ═══ پالتِ بدنه ═══
+     همه‌ی این رنگ‌ها از خودِ داراییِ سارا نمونه‌برداری شده‌اند، نه انتخابِ
+     سلیقه‌ای. با میانه‌ی پیکسل‌ها اندازه‌گیری شد:
+       بلوزِ سارا در گرافیک  #b6283f   (در نورِ خام #d73448)
+       زمینه‌ی گرافیک        #292629
+       شالِ کرِم              #dcd8d9
+       دیوارِ هیروی ویدیویی   حدود #d9cfc0
+     پس لهجه‌ی بدنه همان تنها چیزِ اشباعِ کادرِ هیرو است: قرمزِ خودش.
+
+     نسخه‌ی قبل مشکیِ سرد + بنفشِ روشن بود؛ آن ترکیب هیچ نسبتی با سارا
+     نداشت و همان قالبِ پیش‌فرضِ «سایتِ ساخته‌ی هوش مصنوعی» است. */
+  --color-ink: #14110f;
+  --color-char: #1a1719;
+  --color-char-2: #231f21;
+  --color-bone: #e4ddd3;
+  --color-bone-2: #d5cabb;
+  --color-rose: #c8324a;
+  --color-rose-deep: #9e1f33;
+  --color-rose-lit: #e06b7d;
+  --color-chalk: #e6e1dc;
+  --color-dust: #a79e94;
+  --color-graphite: #4a4239;
+  --color-paper: #f0ebe4;
+  --color-muted: #a79e94;
+  --color-violet: #6633ee;
+
+  /* قرمزهای هیرو — با نمونه‌برداری از خودِ پرتره‌ی سارا، نه حدسی.
+     crimson = زمینه‌ی میانی، deep = لبه‌های کادر، lit = نسخه‌ی روشن‌شده.
+     ember = نور لبه‌ای گرمی که دور موها و شال می‌افتد؛ لهجه‌ی هیرو است
+     چون بنفش برند روی این قرمز می‌زند. */
+  --color-crimson: #4a020c;
+  --color-crimson-deep: #2a0105;
+  --color-crimson-lit: #640216;
+  --color-ember: #eba14a;
+}
+
+/* انیمیشن ShineBorder.
+   بیرون از @theme تعریف شده تا همیشه در خروجی بماند: کامپوننت به‌جای
+   utility «animate-shine» از مقدار دلخواه [animation:shine_...] استفاده
+   می‌کند، پس Tailwind توکن تم را tree-shake می‌کرد. */
+@keyframes shine {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* ورودِ قرص‌های کنش.
+   عمداً `from` تنها و بدون `animation-fill-mode`: بیرون از بازه‌ی
+   انیمیشن، عنصر مقدارِ خودش را می‌گیرد که `opacity: 1` است. پس اگر
+   موتور انیمیشن اجرا نشود — پنل مرورگر، prefers-reduced-motion، یا
+   شکستِ JS — محتوا **دیده می‌شود**. با `both` یا `backwards` حالتِ
+   شروع نگه داشته می‌شد و قرص‌ها نامرئی می‌ماندند؛ همان دامی که در این
+   پروژه سه بار خوردیم. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   آشکارسازی با اسکرول — با تایم‌لاینِ خودِ CSS، نه با جاوااسکریپت.
+
+   چرا این‌طور و نه IntersectionObserver:
+     • قاعده‌ی پروژه این است که خوانایی به انیمیشن گره نخورد. این بلوک
+       داخل `@supports` است، پس مرورگری که `animation-timeline` ندارد
+       (سافاری، فایرفاکس) هیچ انیمیشنی نمی‌گیرد و محتوا **دیده می‌شود**.
+     • با IO، اگر ناظر شلیک نکند محتوا نامرئی می‌مانَد — همان دامی که در
+       همین پروژه چند بار خوردیم و بارِ آخر در نوارِ ناوبری هم دیدیم.
+     • بی JS است، پس در سرور-کامپوننت‌ها هم کار می‌کند و باندل کلاینت
+       بزرگ نمی‌شود.
+
+   `animation-range` عمداً کوتاه است تا محتوا زود کامل شود و کاربر
+   هیچ‌وقت منتظرِ متن نمانَد.
+   ═══════════════════════════════════════════════════════════════════ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up 1s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 26%;
+    }
+  }
+}
+
+/* نوارِ پیشرفتِ اسکرول.
+   الگوی «روایتِ اسکرول‌محور» می‌گوید خواننده باید بداند کجای قصه است.
+   با `scroll()` انجام می‌شود، بی هیچ جاوااسکریپتی — و داخل `@supports`،
+   پس مرورگرِ بی‌پشتیبان فقط نوار را نمی‌بیند و چیزی نمی‌شکند. */
+@keyframes progress-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-rail {
+    animation: progress-grow 1s linear both;
+    animation-timeline: scroll(root block);
+    transform-origin: right center;
+  }
+}
+
+/* لهجه‌ی «لحظه» — خطی که در بخشِ داستان زیرِ انتخاب می‌آید */
+@keyframes rule-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rule-in {
+      animation: rule-grow 1.1s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 34%;
+      transform-origin: right center;
+    }
+  }
+}
+
+/* کلاس کمکی که ShineBorder به آن ارجاع می‌دهد */
+@utility bg-shine-size {
+  background-size: 300% 300%;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* عمداً بدون overflow روی عنصر ریشه: «clip» روی <html> باکس ریشه را
+     غیرقابل‌اسکرول می‌کند و ارتفاع سند را صفر گزارش می‌دهد — که هم اسکرول
+     برنامه‌ای را می‌شکند و هم useScroll و IntersectionObserver را.
+     مهار سرریز افقی روی body کافی است. */
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* خطِ چین‌دارِ «داستان» که آرام جلو می‌رود.
+   با CSS و نه با موتورِ انیمیشنِ جاوااسکریپت: کامپوننتِ اصلی این را با
+   `m.path` و rAF می‌ساخت که یعنی بخش باید کلاینت می‌شد و انیمیشن بیرون
+   از کادر هم می‌چرخید. این نسخه سرور می‌مانَد، و بلوکِ سراسریِ
+   `prefers-reduced-motion` پایینِ همین فایل خودش خاموشش می‌کند.
+   عددِ ۱۴۰ مضربِ ۱۴ (۸+۶) است تا حلقه بی‌درز ببندد. */
+@keyframes story-dash {
+  to {
+    stroke-dashoffset: -140;
+  }
+}
+
+.story-path {
+  animation: story-dash 3s linear infinite;
+}
+
+::selection {
+  background: var(--color-violet);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
